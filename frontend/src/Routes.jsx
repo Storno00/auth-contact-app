@@ -4,7 +4,8 @@ import HomePage from './pages/Home/HomePage';
 import AboutPage from './pages/About/AboutPage';
 import ContactsPage from './pages/Contacts/ContactsPage';
 import UsersPage from './pages/Users/UsersPage';
-import AdminRoutes from './components/AdminRoutes/AdminRoutes';
+import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
+import ProfilePage from './pages/Profile/ProfilePage';
 
 const router = createBrowserRouter([
     {
@@ -14,7 +15,10 @@ const router = createBrowserRouter([
             { path: "/", element: <HomePage /> },
             { path: "/about", element: <AboutPage /> },
             { path: "/contacts", element: <ContactsPage /> },
-            { path: "/admin", element: <AdminRoutes />, children: [
+            { path: "/", element: <ProtectedRoutes isAdmin={false} />, children: [
+                { path: "/profile", element: <ProfilePage /> }
+            ]},
+            { path: "/admin", element: <ProtectedRoutes isAdmin={true} />, children: [
                 { path: "/admin/users", element: <UsersPage /> }
             ]},
         ]
